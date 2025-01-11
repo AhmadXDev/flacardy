@@ -1,44 +1,46 @@
 import 'package:flacardy/constants/spacing.dart';
 import 'package:flacardy/data/supabase_database.dart';
 import 'package:flacardy/extensions/nav.dart';
-import 'package:flacardy/models/pocket.dart';
 import 'package:flacardy/models/folder.dart';
-import 'package:flacardy/pages/folder_page.dart';
+import 'package:flacardy/models/pocket.dart';
 import 'package:flacardy/pages/pocket_page.dart';
 import 'package:flacardy/widgets/custom_floating_action_button.dart';
 import 'package:flacardy/widgets/custom_future_builder.dart';
 import 'package:flacardy/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class FolderPage extends StatefulWidget {
+  final Folder folder;
+
+  const FolderPage({super.key, required this.folder});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<FolderPage> createState() => _FolderPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _FolderPageState extends State<FolderPage> {
   TextEditingController nameController = TextEditingController();
 
-  Future<List<dynamic>> getRootItems() async {
-    // Fetch both Folders and Pockets in the root (folder_path == NULL)
-    final folders = await SupabaseDatabase().getRootFolders();
-    final pockets = await SupabaseDatabase().getRootPockets();
+  Future<List<dynamic>> getFolderContents() async {
+    final folders =
+        await SupabaseDatabase().getSubFolders(widget.folder.fullPath);
+    final pockets =
+        await SupabaseDatabase().getPocketsInFolder(widget.folder.fullPath);
     return [...folders, ...pockets];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Home Page"),
+      appBar: customAppBar('${widget.folder.name} 📁'),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: CustomFutureBuilder<List<dynamic>>(
-          future: getRootItems(),
+          future: getFolderContents(),
           onData: (data) {
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Number of columns
+                crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
@@ -46,7 +48,6 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 final item = data[index];
 
-                // FOLDER:
                 if (item is Folder) {
                   return InkWell(
                     child: customFolderWidget(item),
@@ -54,20 +55,16 @@ class _HomePageState extends State<HomePage> {
                       context.push(FolderPage(folder: item));
                     },
                   );
-                }
-
-                // POCKET:
-                else if (item is Pocket) {
+                } else if (item is Pocket) {
                   return InkWell(
                     child: customPocketWidget(item),
                     onTap: () {
-                      context.push(PocketPage(pocket: item));
+                      context.push(PocketPage(
+                        pocket: item,
+                      ));
                     },
                   );
-                }
-
-                // Something other than Folder or Pocket
-                else {
+                } else {
                   return SizedBox.shrink();
                 }
               },
@@ -75,14 +72,12 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      // A floating button to add a Folder and a Pocket
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           width32,
-          // Add Folder Button
           CustomFloatingActionButton(
-            heroTag: "addFolder",
+            heroTag: "addFolder_${widget.folder.fullPath}",
             tooltip: "Add Folder",
             icon: const Icon(Icons.folder),
             addButtonName: "Add Folder",
@@ -91,36 +86,35 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               await SupabaseDatabase().addFolder(
                 Folder(
-                  fullPath: nameController
-                      .text, // Generate fullPath dynamically if needed
+                  fullPath: "${widget.folder.fullPath}/${nameController.text}",
                   name: nameController.text,
-                  parentPath: null,
+                  parentPath: widget.folder.fullPath,
                 ),
               );
               nameController.clear();
               if (context.mounted) setState(() {});
-              Navigator.of(context).pop(); // Close dialog
+              Navigator.of(context).pop();
             },
           ),
-
           Spacer(),
-
-          // Add Pocket Button
           CustomFloatingActionButton(
-              heroTag: "addPocket",
-              tooltip: "Add Pocket",
-              icon: const Icon(Icons.add),
-              addButtonName: "Add Pocket",
-              controller: nameController,
-              onStateUpdate: () => {},
-              onPressed: () async {
-                await SupabaseDatabase().addPocket(
-                  Pocket(name: nameController.text, folderPath: null),
-                );
-                nameController.clear();
-                if (context.mounted) setState(() {});
-                Navigator.of(context).pop(); // Close dialog
-              })
+            heroTag: "addPocket_${widget.folder.fullPath}",
+            tooltip: "Add Pocket",
+            icon: const Icon(Icons.add),
+            addButtonName: "Add Pocket",
+            controller: nameController,
+            onStateUpdate: () => setState(() {}),
+            onPressed: () async {
+              await SupabaseDatabase().addPocket(
+                Pocket(
+                  name: nameController.text,
+                  folderPath: widget.folder.fullPath,
+                ),
+              );
+              if (context.mounted) setState(() {});
+              Navigator.of(context).pop();
+            },
+          ),
         ],
       ),
     );

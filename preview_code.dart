@@ -51,13 +51,13 @@ class MyDatabase {
   // Method to add a Pocket
   Future<int> addPocket(String name) async {
     final db = await database;
-    return await db.insert('Pockets', {'name': name});
+    return await db.insert('pockets', {'name': name});
   }
 
   // Method to add a Card
   Future<int> addCard(String front, String back, int pocketId) async {
     final db = await database;
-    return await db.insert('Cards', {
+    return await db.insert('cards', {
       'front': front,
       'back': back,
       'pocketId': pocketId,
@@ -67,14 +67,14 @@ class MyDatabase {
   // Method to retrieve all Pockets
   Future<List<Map<String, dynamic>>> getPockets() async {
     final db = await database;
-    return await db.query('Pockets');
+    return await db.query('pockets');
   }
 
   // Method to retrieve all Cards for a specific Pocket
   Future<List<Map<String, dynamic>>> getCardsByPocket(int pocketId) async {
     final db = await database;
     return await db.query(
-      'Cards',
+      'cards',
       where: 'pocketId = ?',
       whereArgs: [pocketId],
     );
@@ -84,7 +84,7 @@ class MyDatabase {
   Future<int> deletePocket(int pocketId) async {
     final db = await database;
     return await db.delete(
-      'Pockets',
+      'pockets',
       where: 'id = ?',
       whereArgs: [pocketId],
     );

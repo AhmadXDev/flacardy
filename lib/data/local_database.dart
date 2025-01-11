@@ -20,6 +20,7 @@ class LocalDatabase {
 
   Future<Database> _initDatabase() async {
     String databasePath = await getDatabasesPath();
+    print(databasePath);
     String path = join(databasePath, _databaseName);
     Database myDb = await openDatabase(
       path,
@@ -52,19 +53,19 @@ class LocalDatabase {
 
   Future<int> addPocket(Pocket pocket) async {
     final db = await database;
-    return await db.insert('Pockets', pocket.PocketToRow());
+    return await db.insert('pockets', pocket.pocketToRow());
   }
 
   Future<int> addCard(FlashCard card) async {
     final db = await database;
-    return await db.insert('Cards', card.CardToRow());
+    return await db.insert('cards', card.CardToRow());
   }
 
   // Retrieving:
 
   Future<List<Pocket>> getPockets() async {
     final db = await database;
-    final List<Map<String, dynamic>> rows = await db.query('Pockets');
+    final List<Map<String, dynamic>> rows = await db.query('pockets');
 
     return rows.map((row) {
       return Pocket(id: row['id'], name: row['name']);
@@ -74,11 +75,11 @@ class LocalDatabase {
   Future<List<FlashCard>> getPocketCards(int pocketId) async {
     final db = await database;
     final List<Map<String, dynamic>> rows = await db.query(
-      'Cards',
+      'cards',
       where: 'pocketId = ?',
       whereArgs: [pocketId],
     );
 
-    return rows.map((row) => FlashCard.RowToCard(row)).toList();
+    return rows.map((row) => FlashCard.rowToCard(row)).toList();
   }
 }

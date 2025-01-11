@@ -5,7 +5,7 @@ extension Nav on BuildContext {
     Navigator.push(this, MaterialPageRoute(builder: (context) => target));
   }
 
-  pushOut(Widget target) {
+  pushAndRemoveUntil(Widget target) {
     Navigator.pushAndRemoveUntil(this,
         MaterialPageRoute(builder: (context) => target), (route) => false);
   }
