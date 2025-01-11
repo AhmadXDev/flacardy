@@ -1,4 +1,4 @@
-A Flash Cards app, that lets users study flash cards and generate them using an AI. 
+A Flash Cards app, that lets users study flash cards and generate them using an AI API. 
 
 ## Pages:
 
