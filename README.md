@@ -34,10 +34,16 @@ To add pocket to the home page
 ![image](https://github.com/user-attachments/assets/c01fb51f-59e2-4d7b-8c69-60ef5dca35a7)
 ![image](https://github.com/user-attachments/assets/d9dc3740-1d48-43e9-b1a1-7b72a6911d50)
 
-to delete a folder or a pocket the user will have to long press it. (it will delete all items under a folder) 
+To delete a folder or a pocket the user will have to long press it (it will delete all items under a folder) 
 
 ![image](https://github.com/user-attachments/assets/7248d36d-5f74-4652-a6be-99db95960eb6)
 ![image](https://github.com/user-attachments/assets/9eebbac7-12bf-4dc0-9178-d6fdf8d8ce24)
+
+To edit a folder or a pocket the user will have to double press it
+
+![image](https://github.com/user-attachments/assets/3e403875-07ad-4e5c-a346-174c3d88cb5f)
+![image](https://github.com/user-attachments/assets/41f7a8a7-e6c6-40c5-9a06-31e7efb40c4f)
+
 
 
 ### Folder Page: 
