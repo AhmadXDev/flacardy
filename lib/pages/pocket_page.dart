@@ -1,6 +1,7 @@
 import 'package:flacardy/constants/spacing.dart';
 import 'package:flacardy/extensions/nav.dart';
 import 'package:flacardy/models/flash_card.dart';
+import 'package:flacardy/pages/manage_cards_page.dart';
 import 'package:flacardy/widgets/custom_future_builder.dart';
 import 'package:flacardy/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
@@ -119,30 +120,45 @@ class _PocketPageState extends State<PocketPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 12),
-            CustomFutureBuilder<int>(
-              future: _getNumberOfCards(),
-              onData: (data) {
-                return Text(
-                  "Number of Cards: ${data}",
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
-            ),
-            CustomFutureBuilder<int>(
-              future: _getNumberOfDueCards(),
-              onData: (data) {
-                return Text(
-                  "Number of due Cards: ${data}",
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    height12,
+                    CustomFutureBuilder<int>(
+                      future: _getNumberOfCards(),
+                      onData: (data) {
+                        return Text(
+                          "Number of Cards: ${data}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                    ),
+                    CustomFutureBuilder<int>(
+                      future: _getNumberOfDueCards(),
+                      onData: (data) {
+                        return Text(
+                          "Number of due Cards: ${data}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                width12,
+                ElevatedButton(
+                  onPressed: () =>
+                      context.push(ManageCardsPage(pocket: widget.pocket)),
+                  child: const Text("Edit Flashcards"),
+                )
+              ],
             ),
             height24,
             EnterData(
@@ -159,6 +175,7 @@ class _PocketPageState extends State<PocketPage> {
                 child: const Text("Study Now"),
               ),
             ),
+            height24
           ],
         ),
       ),

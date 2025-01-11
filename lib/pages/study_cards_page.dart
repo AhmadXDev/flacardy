@@ -25,7 +25,7 @@ class _StudyCardsPageState extends State<StudyCardsPage> {
   int cardsNum = 0;
   List<FlashCard> cards = [];
   bool isLoading = true;
-  bool showButtons = false; // To control the visibility of buttons
+  bool showButtons = false;
   GlobalKey<FlipCardState> flipCardKey = GlobalKey<FlipCardState>();
   late ConfettiController confettiController;
 
@@ -147,7 +147,7 @@ class _StudyCardsPageState extends State<StudyCardsPage> {
                       Expanded(
                         child: FlipCard(
                           key: flipCardKey,
-                          direction: FlipDirection.HORIZONTAL,
+                          direction: FlipDirection.VERTICAL,
                           onFlipDone: (isBack) {
                             if (isBack) {
                               setState(() {
