@@ -124,4 +124,4 @@ the screen will show an atnimation after the user finishes all the cards and the
 
 ![image](https://github.com/user-attachments/assets/3f66e2b5-3255-4a6f-9a75-c6de4d53da95)
 
-That's it! 
+That's it 🙂🎉! 
