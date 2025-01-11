@@ -65,18 +65,18 @@ This pocket name is Vocabulary where it's under the folder English
 
 ![image](https://github.com/user-attachments/assets/9c35d93a-c42e-443f-b7e4-2eb121c8b01d)
 
-The user can enter a title related to the pocket to generaet 10 random flash cards, these cards will be generate and stored in thier pocket automatically
+The user can enter a title related to the pocket to generaet 10 random flash cards, these cards will be generated and stored in thier pocket automatically
 
 ![image](https://github.com/user-attachments/assets/0b2615cd-294d-4283-96de-c40b31f28b33)
 ![image](https://github.com/user-attachments/assets/599cea06-211e-4912-8d85-79ecf6c04ff3)
 
-Adding card, the dialog stasy in case the user wants to add more than a card (the bar on the left is from the phone emulator) 
+Adding card, even after adding the dialog stay in case the user wants to add more than a card (the bar on the left is from the phone emulator) 
 
 ![image](https://github.com/user-attachments/assets/27c3c96f-2922-49b5-91a9-e7c09acfb851)
 ![image](https://github.com/user-attachments/assets/46a5ca97-2686-49fd-8180-a0db5c52b906)
 
 
-Editing and Deleting flash cards opens a new page called Manage Cards Page
+the button Edit FlashCards will opens a new page called Manage Cards Page to edit and delete flash cards
 
 ### Manage Cards Page
 ![image](https://github.com/user-attachments/assets/d0980a9e-eab6-4672-9e3e-66cf5d711c25)
@@ -91,17 +91,17 @@ After deleting
 
 ![image](https://github.com/user-attachments/assets/16b1edbe-6dfe-4fb8-a806-df5c9325257b)
 
-After pressing the Study Now button the Pocket Page, it then will open the Study Cards Page to study the cards of that pocket 
+After pressing the Study Now button on the Pocket Page, it then will open the Study Cards Page to study the cards of that pocket 
 
 ### Study Cards Page 
-will dispaly all the due cards in the pocket, linearly based on user adding, (the other picture isn't the same, just to show flip animation)
+will dispaly all the due cards in the pocket, linearly based on user adding, (the other picture isn't the same card, just to show flip animation)
+pressing on the card will make it do a vartical flip animation and show the back of the card (the answer) 
 
 ![image](https://github.com/user-attachments/assets/3377d10b-835e-41c5-be1e-fc698f462aba)
 ![image](https://github.com/user-attachments/assets/83a89bd7-e168-4e32-888f-c75e1c29e53f)
 
-pressing on the card will make it do a vartical flip animation and show the back of the card (the answer) 
 
-and will show four buttons for evaluation
+afer pressing the card, the program will show four buttons for evaluation
 
 evaluation depends on the repetitions, but for the first time: 
 
@@ -124,4 +124,4 @@ the screen will show an atnimation after the user finishes all the cards and the
 
 ![image](https://github.com/user-attachments/assets/3f66e2b5-3255-4a6f-9a75-c6de4d53da95)
 
-
+That's it! 
