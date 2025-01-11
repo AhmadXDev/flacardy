@@ -9,7 +9,7 @@ class CustomFloatingActionButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String heroTag;
   final TextEditingController controller;
-  final VoidCallback onStateUpdate; // New callback for updating state
+  final VoidCallback onStateUpdate;
   final String addButtonName;
 
   const CustomFloatingActionButton({

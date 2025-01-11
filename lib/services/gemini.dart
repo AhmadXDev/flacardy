@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+// NOTE: a lot of this gemini code is taken from their website but I understood it enough.
 class Gemini {
   Future<dynamic> sendRequest(String prompt) async {
     final String apiKey = dotenv.env['geminiKey'] ?? '';

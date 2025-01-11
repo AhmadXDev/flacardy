@@ -15,7 +15,7 @@ class SupabaseDatabase {
   addPocket(Pocket pocket) async {
     await supabase.from('pockets').insert({
       'name': pocket.name,
-      'folder_path': pocket.folderPath, // Include the folder path
+      'folder_path': pocket.folderPath,
     });
   }
 
@@ -67,19 +67,18 @@ class SupabaseDatabase {
 
   Future<List<Folder>> getSubFolders(String folderPath) async {
     final response = await supabase
-        .from('folders') // Replace 'folders' with your actual table name
+        .from('folders')
         .select('*')
-        .eq('parent_path', folderPath); // Filters by parent_path
+        .eq('parent_path', folderPath);
 
-    // Convert response data to a list of Folder objects
     return response.map((folder) => Folder.rowToFolder(folder)).toList();
   }
 
   Future<List<Pocket>> getPocketsInFolder(String folderPath) async {
     final response = await supabase
-        .from('pockets') // Replace 'pockets' with your actual table name
+        .from('pockets')
         .select('*')
-        .eq('folder_path', folderPath); // Filters by folder_path
+        .eq('folder_path', folderPath);
     return response.map((pocket) => Pocket.rowToPocket(pocket)).toList();
   }
 
