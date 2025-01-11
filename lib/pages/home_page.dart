@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   TextEditingController nameController = TextEditingController();
 
   Future<List<dynamic>> getRootItems() async {
-    // Fetch both Folders and Pockets in the root (folder_path == NULL)
     final folders = await SupabaseDatabase().getRootFolders();
     final pockets = await SupabaseDatabase().getRootPockets();
     return [...folders, ...pockets];
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           onData: (data) {
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Number of columns
+                crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
@@ -46,28 +45,23 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 final item = data[index];
 
-                // FOLDER:
                 if (item is Folder) {
                   return InkWell(
-                    child: customFolderWidget(item),
+                    child: customFolderWidget(
+                        item, context, () => setState(() {})),
                     onTap: () {
                       context.push(FolderPage(folder: item));
                     },
                   );
-                }
-
-                // POCKET:
-                else if (item is Pocket) {
+                } else if (item is Pocket) {
                   return InkWell(
-                    child: customPocketWidget(item),
+                    child: customPocketWidget(
+                        item, context, () => setState(() {})),
                     onTap: () {
                       context.push(PocketPage(pocket: item));
                     },
                   );
-                }
-
-                // Something other than Folder or Pocket
-                else {
+                } else {
                   return SizedBox.shrink();
                 }
               },
@@ -75,12 +69,10 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      // A floating button to add a Folder and a Pocket
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           width32,
-          // Add Folder Button
           CustomFloatingActionButton(
             heroTag: "addFolder",
             tooltip: "Add Folder",
@@ -91,21 +83,17 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               await SupabaseDatabase().addFolder(
                 Folder(
-                  fullPath: nameController
-                      .text, // Generate fullPath dynamically if needed
+                  fullPath: nameController.text,
                   name: nameController.text,
                   parentPath: null,
                 ),
               );
               nameController.clear();
               if (context.mounted) setState(() {});
-              Navigator.of(context).pop(); // Close dialog
+              Navigator.of(context).pop();
             },
           ),
-
           Spacer(),
-
-          // Add Pocket Button
           CustomFloatingActionButton(
               heroTag: "addPocket",
               tooltip: "Add Pocket",
@@ -119,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 );
                 nameController.clear();
                 if (context.mounted) setState(() {});
-                Navigator.of(context).pop(); // Close dialog
+                Navigator.of(context).pop();
               })
         ],
       ),

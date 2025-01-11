@@ -50,14 +50,16 @@ class _FolderPageState extends State<FolderPage> {
 
                 if (item is Folder) {
                   return InkWell(
-                    child: customFolderWidget(item),
+                    child: customFolderWidget(
+                        item, context, () => setState(() {})),
                     onTap: () {
                       context.push(FolderPage(folder: item));
                     },
                   );
                 } else if (item is Pocket) {
                   return InkWell(
-                    child: customPocketWidget(item),
+                    child: customPocketWidget(
+                        item, context, () => setState(() {})),
                     onTap: () {
                       context.push(PocketPage(
                         pocket: item,

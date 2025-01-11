@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+  print('Loaded Keys: ${dotenv.env}');
   await Supabase.initialize(
     url: dotenv.env["supabaseUrl"]!,
     anonKey: dotenv.env["supabaseKey"]!,

@@ -5,7 +5,6 @@ class Folder {
 
   Folder({required this.fullPath, required this.name, this.parentPath});
 
-  // Convert database row to Folder object
   static Folder rowToFolder(Map<String, dynamic> row) {
     return Folder(
       fullPath: row['full_path'],
@@ -14,7 +13,6 @@ class Folder {
     );
   }
 
-  // Convert Folder object to database row
   Map<String, dynamic> folderToRow() {
     return {
       'full_path': fullPath,

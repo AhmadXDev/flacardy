@@ -1,3 +1,4 @@
+import 'package:flacardy/constants/spacing.dart';
 import 'package:flacardy/extensions/nav.dart';
 import 'package:flacardy/models/flash_card.dart';
 import 'package:flacardy/widgets/custom_future_builder.dart';
@@ -18,6 +19,7 @@ class PocketPage extends StatefulWidget {
 class _PocketPageState extends State<PocketPage> {
   final TextEditingController frontController = TextEditingController();
   final TextEditingController backController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   final FocusNode frontFocusNode = FocusNode();
 
   @override
@@ -25,6 +27,7 @@ class _PocketPageState extends State<PocketPage> {
     frontController.dispose();
     backController.dispose();
     frontFocusNode.dispose();
+    titleController.dispose();
     super.dispose();
   }
 
@@ -141,7 +144,12 @@ class _PocketPageState extends State<PocketPage> {
                 );
               },
             ),
-            const SizedBox(height: 24),
+            height24,
+            EnterData(
+                titleController: titleController,
+                pocket: widget.pocket,
+                refreshCallback: () => setState(() {})),
+            height24,
             Center(
               child: ElevatedButton(
                 onPressed: () => context.push(StudyCardsPage(

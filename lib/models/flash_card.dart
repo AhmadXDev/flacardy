@@ -3,10 +3,10 @@ class FlashCard {
   final int pocketId;
   final String front;
   final String back;
-  double easeFactor; // Ease factor
-  int interval; // Interval in days
-  int repetitions; // Number of reviews
-  DateTime? nextReview; // Next review date
+  double easeFactor;
+  int interval;
+  int repetitions;
+  DateTime? nextReview;
 
   FlashCard({
     this.id,

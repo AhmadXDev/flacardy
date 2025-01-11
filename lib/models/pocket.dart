@@ -2,10 +2,10 @@ import 'package:flacardy/data/supabase_database.dart';
 import 'package:flacardy/models/flash_card.dart';
 
 class Pocket {
-  final int? id; // Unique identifier for the pocket
-  final String name; // Pocket name
-  final String? folderPath; // Path to the parent folder (nullable)
-  List<FlashCard> cards; // Cards belonging to the pocket
+  final int? id;
+  final String name;
+  final String? folderPath;
+  List<FlashCard> cards;
 
   Pocket({
     this.id,
@@ -14,7 +14,6 @@ class Pocket {
     this.cards = const [],
   });
 
-  // Convert a database row to a Pocket object
   static Pocket rowToPocket(Map<String, dynamic> row) {
     return Pocket(
       id: row['id'],
@@ -24,7 +23,6 @@ class Pocket {
     );
   }
 
-  // Convert a Pocket object to a database row
   Map<String, dynamic> pocketToRow() {
     return {
       'name': name,
@@ -32,7 +30,6 @@ class Pocket {
     };
   }
 
-  // Load cards belonging to this pocket
   Future<void> loadCards() async {
     if (id == null) {
       throw Exception(

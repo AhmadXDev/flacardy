@@ -103,4 +103,30 @@ class SupabaseDatabase {
       'next_review': card.nextReview?.toIso8601String(),
     }).eq('id', card.id!);
   }
+
+  // Deleting:
+
+  Future<void> deleteFolder(String folderPath) async {
+    await supabase.from('folders').delete().eq('full_path', folderPath);
+  }
+
+  Future<void> deletePocket(int pocketId) async {
+    await supabase.from('pockets').delete().eq('id', pocketId);
+  }
+
+  Future<void> deleteCard(int cardId) async {
+    await supabase.from('cards').delete().eq('id', cardId);
+  }
+
+  // Editing Names
+
+  Future<void> updateFolderName(String folderPath, String newName) async {
+    await supabase
+        .from('folders')
+        .update({'name': newName}).eq('full_path', folderPath);
+  }
+
+  Future<void> updatePocketName(int pocketId, String newName) async {
+    await supabase.from('pockets').update({'name': newName}).eq('id', pocketId);
+  }
 }
