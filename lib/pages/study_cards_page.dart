@@ -73,22 +73,27 @@ class _StudyCardsPageState extends State<StudyCardsPage> {
 
     try {
       await SupabaseDatabase().updateCard(currentCard);
-      nextCard();
-      setState(() {});
-      widget.refreshCallback();
+      setState(() {
+        nextCard();
+        widget.refreshCallback();
+      });
     } catch (e) {
       _showSnackbar("Error evaluating card: $e");
     }
   }
 
   void nextCard() async {
-    if (currentIndex < cards.length - 1)
+    if (currentIndex < cards.length - 1) {
       currentIndex++;
-    else
-      await loadCards();
+      showButtons = false;
+      setState(() {});
 
-    showButtons = false;
-    flipCardKey.currentState?.toggleCard();
+      if (flipCardKey.currentState?.isFront == false) {
+        flipCardKey.currentState?.toggleCardWithoutAnimation();
+      }
+    } else {
+      await loadCards();
+    }
   }
 
   @override
