@@ -233,10 +233,12 @@ ConfettiWidget customConfettiWidget(ConfettiController confettiController) {
   );
 }
 
-Column EnterData({
+Column enterAIData({
   required TextEditingController titleController,
   required Pocket pocket,
   required VoidCallback refreshCallback,
+  required ValueChanged<bool> setLoading,
+  required void Function(String message) showSnackbar,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,16 +253,26 @@ Column EnterData({
       height12,
       Center(
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             final title = titleController.text.trim();
             if (title.isNotEmpty) {
-              generateFlashCardsForPocket(title: title, pocket: pocket);
-              refreshCallback();
+              setLoading(true);
+              try {
+                await generateFlashCardsForPocket(title: title, pocket: pocket);
+                refreshCallback();
+                showSnackbar("Cards generated successfully!");
+              } catch (e) {
+                showSnackbar("Failed to generate cards: $e");
+              } finally {
+                setLoading(false);
+              }
+            } else {
+              showSnackbar("Title is empty! please enter some title");
             }
           },
           child: const Text("Generate Flashcards"),
         ),
-      )
+      ),
     ],
   );
 }

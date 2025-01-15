@@ -7,6 +7,7 @@ import 'package:flacardy/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flacardy/data/supabase_database.dart';
 import 'package:flacardy/models/pocket.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'study_cards_page.dart';
 
 class PocketPage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _PocketPageState extends State<PocketPage> {
   final TextEditingController backController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
   final FocusNode frontFocusNode = FocusNode();
+  bool LoadingAI = false;
 
   @override
   void dispose() {
@@ -32,14 +34,20 @@ class _PocketPageState extends State<PocketPage> {
     super.dispose();
   }
 
-  void _showSnackbar(String message) {
+  void showSnackbar(String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
+  void setLoading(bool value) {
+    setState(() {
+      LoadingAI = value;
+    });
+  }
+
   Future<void> _addCard() async {
     if (frontController.text.isEmpty || backController.text.isEmpty) {
-      _showSnackbar("Front and Back fields cannot be empty.");
+      showSnackbar("Front and Back fields cannot be empty.");
       return;
     }
 
@@ -53,14 +61,14 @@ class _PocketPageState extends State<PocketPage> {
       await SupabaseDatabase().addCard(newCard);
       frontController.clear();
       backController.clear();
-      _showSnackbar("Card added successfully!");
+      showSnackbar("Card added successfully!");
       frontFocusNode.requestFocus();
     } catch (e) {
-      _showSnackbar("Failed to add card: $e");
+      showSnackbar("Failed to add card: $e");
     }
   }
 
-  void _showAddCardDialog() async {
+  void showAddCardDialog() async {
     await showDialog(
       context: context,
       builder: (context) {
@@ -101,12 +109,12 @@ class _PocketPageState extends State<PocketPage> {
     setState(() {});
   }
 
-  Future<int> _getNumberOfCards() async {
+  Future<int> getNumberOfCards() async {
     final cards = await SupabaseDatabase().getPocketCards(widget.pocket.id!);
     return cards.length;
   }
 
-  Future<int> _getNumberOfDueCards() async {
+  Future<int> getNumberOfDueCards() async {
     final cards = await SupabaseDatabase().getPocketDueCards(widget.pocket.id!);
     return cards.length;
   }
@@ -127,7 +135,7 @@ class _PocketPageState extends State<PocketPage> {
                   children: [
                     height12,
                     CustomFutureBuilder<int>(
-                      future: _getNumberOfCards(),
+                      future: getNumberOfCards(),
                       onData: (data) {
                         return Text(
                           "Number of Cards: ${data}",
@@ -139,7 +147,7 @@ class _PocketPageState extends State<PocketPage> {
                       },
                     ),
                     CustomFutureBuilder<int>(
-                      future: _getNumberOfDueCards(),
+                      future: getNumberOfDueCards(),
                       onData: (data) {
                         return Text(
                           "Number of due Cards: ${data}",
@@ -161,10 +169,12 @@ class _PocketPageState extends State<PocketPage> {
               ],
             ),
             height24,
-            EnterData(
+            enterAIData(
                 titleController: titleController,
                 pocket: widget.pocket,
-                refreshCallback: () => setState(() {})),
+                refreshCallback: () => setState(() {}),
+                setLoading: setLoading,
+                showSnackbar: showSnackbar),
             height24,
             Center(
               child: ElevatedButton(
@@ -175,12 +185,21 @@ class _PocketPageState extends State<PocketPage> {
                 child: const Text("Study Now"),
               ),
             ),
-            height24
+            height24,
+            if (LoadingAI) ...[
+              Center(
+                child: LoadingAnimationWidget.newtonCradle(
+                  color: Colors.blue,
+                  size: 200,
+                ),
+              ),
+              height12,
+            ],
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showAddCardDialog,
+        onPressed: showAddCardDialog,
         child: const Icon(Icons.add),
       ),
     );
