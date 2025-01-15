@@ -1,4 +1,4 @@
-A Flash Cards app, that let users study flash cards and generate them using an AI. 
+A Flash Cards app, that lets users study flash cards and generate them using an AI API. 
 
 ## Pages:
 
@@ -10,9 +10,9 @@ A Flash Cards app, that let users study flash cards and generate them using an A
 
 ## Features:
 
-1. Create, Delete and Edit a folder and nested folder for organization
-2. Create, Delete and Edit a Pocket in the root (home page) or in any folder 
-3. Create, Delete and Edit a card for a pocket where the user will enter the front and back of the card (text only) 
+1. Create, Delete, and Edit a folder and nested folder for organization
+2. Create, Delete, and Edit a Pocket in the root (home page) or in any folder 
+3. Create, Delete, and Edit a card for a pocket where the user will enter the front and back of the card (text only) 
 4. Enter a title to generate 10 flash cards automatically for a pocket 
 5. Evaluation: A user can evaluate a card between (Again, Hard, Good, and Easy) and the algorithm will handle it to decided when is the appropriate time to show these cards again 
 
@@ -70,7 +70,7 @@ The user can enter a title related to the pocket to generaet 10 random flash car
 ![image](https://github.com/user-attachments/assets/0b2615cd-294d-4283-96de-c40b31f28b33)
 ![image](https://github.com/user-attachments/assets/599cea06-211e-4912-8d85-79ecf6c04ff3)
 
-Adding card, even after adding the dialog stay in case the user wants to add more than a card (the bar on the left is from the phone emulator) 
+Adding a card, even after adding the dialog stay in case the user wants to add more than a card (the bar on the left is from the phone emulator) 
 
 ![image](https://github.com/user-attachments/assets/27c3c96f-2922-49b5-91a9-e7c09acfb851)
 ![image](https://github.com/user-attachments/assets/46a5ca97-2686-49fd-8180-a0db5c52b906)
@@ -94,14 +94,14 @@ After deleting
 After pressing the Study Now button on the Pocket Page, it then will open the Study Cards Page to study the cards of that pocket 
 
 ### Study Cards Page 
-will dispaly all the due cards in the pocket, linearly based on user adding, (the other picture isn't the same card, just to show flip animation)
-pressing on the card will make it do a vartical flip animation and show the back of the card (the answer) 
+will display all the due cards in the pocket, linearly based on the user adding, (the other picture isn't the same card, just to show flip animation)
+pressing on the card will make it do a vertical flip animation and show the back of the card (the answer) 
 
 ![image](https://github.com/user-attachments/assets/3377d10b-835e-41c5-be1e-fc698f462aba)
 ![image](https://github.com/user-attachments/assets/83a89bd7-e168-4e32-888f-c75e1c29e53f)
 
 
-afer pressing the card, the program will show four buttons for evaluation
+After pressing the card, the program will show four buttons for evaluation
 
 evaluation depends on the repetitions, but for the first time: 
 
@@ -120,8 +120,28 @@ after the user finishes the cards, it will fetch the cards again to see if there
 ![image](https://github.com/user-attachments/assets/1e83cc29-6d8c-432e-8754-30c50f46eac7)
 ![image](https://github.com/user-attachments/assets/53f511c2-d7a0-420e-989f-a43b6e6031e0)
 
-the screen will show an atnimation after the user finishes all the cards and there is no more due cards
+the screen will show an animation after the user finishes all the cards and there is no more due cards
 
 ![image](https://github.com/user-attachments/assets/3f66e2b5-3255-4a6f-9a75-c6de4d53da95)
+
+
+Database: 
+
+All tables: 
+
+![image](https://github.com/user-attachments/assets/fc321973-3a37-43b4-b8d9-c5f740b47c6e)
+
+Folder Table: 
+
+![image](https://github.com/user-attachments/assets/0ac3ceb3-6ae5-45e9-ae37-2143916d6e11)
+
+Pockets Table: 
+
+![image](https://github.com/user-attachments/assets/769749a4-0b7a-4e2c-bdf0-4ec3b6b75f61)
+
+Cards Table: 
+
+![image](https://github.com/user-attachments/assets/b90e89cc-d65f-4a75-b8b3-9d036cf99fef)
+
 
 That's it 🙂🎉! 
