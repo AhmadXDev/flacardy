@@ -1,0 +1,83 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Android Tablet",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "Android Emulator 2",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5556"
+    },
+    {
+      "name": "Chrome",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "chrome"
+    },
+    {
+      "name": "Current Device",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "Samsung Phone",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "R5CW80RSFVB"
+    },
+    {
+      "name": "Samsung Phone 2",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "2529ebc313057ece"
+    },
+    {
+      "name": "Anas Tablet",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "A3ALUN3810G07512"
+    },
+    {
+      "name": "Samsung Phone (Console Only)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "R5CW80RSFVB",
+      "console": "terminal",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--disable-service-auth-codes",
+        "--disable-dds"
+      ]
+    },
+    {
+      "name": "Samsung Phone (Minimal Debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "R5CW80RSFVB",
+      "flutterMode": "profile",
+      "vmAdditionalArgs": [
+        "--disable-service-auth-codes"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "All Devices",
+      "configurations": ["Android Tablet", "Android Emulator 2", "Chrome"]
+    }
+  ]
+}
